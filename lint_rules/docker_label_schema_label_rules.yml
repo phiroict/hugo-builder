@@ -1,0 +1,46 @@
+---
+profile:
+  name: "Label Schema"
+  description: "Catosplace Label Schema File"
+
+line_rules:
+
+  LABEL:
+    paramSyntaxRegex: /.+/
+
+    # Use defined_label_rules to define a set of labels for your dockerfile
+
+    # Label Schema - http://label-schema.org
+    # Label Schema is a community project to provide a shared namespace for use by
+    # multiple tool
+
+    # A label value is 'valid' if it matches the regular expression 'valueRegex',
+    # otherwise a warning is logged with the string "message" at level 'level'.
+    # 'reference_url' provides a web link where the user can get more information
+    # about the rule.
+       
+    defined_namevals:
+
+      'org.label-schema.docker.cmd':
+        valueRegex: /[\w]+/ 
+        message: "Label 'org.label-schema.docker.cmd' is missing or has invalid format"
+        level: "warn"
+        required: true
+        reference_url:
+          - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.docker.cmd.debug':
+        valueRegex: /[\w]+/
+        message: "Label 'org.label-schema.docker.cmd.debug' is missing or has invalid format"
+        level: "warn"
+        required: true
+        reference_url:
+          - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.docker.cmd.help':
+        valueRegex: /[\w]+/
+        message: "Label 'org.label-schema.docker.cmd.help' is missing or has invalid format"
+        level: "warn"
+        required: true
+        reference_url:
+          - "http://label-schema.org/rc1/#build-time-labels"

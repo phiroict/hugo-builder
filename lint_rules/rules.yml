@@ -1,0 +1,68 @@
+---
+profile:
+  name: "Hugo Builder Rules"
+  description: "Hugo Builder Dockerfile Lint Rules"
+
+line_rules:
+
+  FROM:
+    parmaSyntaxRegex: /^[\w./\-:]+(:[\w.]+)?(-[\w]+)?( as \w+)?$/i
+    rules:
+      -
+        label: "not_from_alpine"
+        regex: /alpine/
+        inverse_rule: true
+        level: "error"
+        message: "Base Image is not from Alpine"
+        description: "Base Image must be from Alpine"
+        reference_url:
+
+  # Ensure that Tini is the Entypoint for the container
+  # ENTRYPOINT ["/sbin/tini/", "--"]
+  ENTRYPOINT: 
+    paramSyntaxRegex: /.+/
+    rules:
+      - 
+        label: "tini_entrypoint"
+        regex: /\[\"\/sbin\/tini\"\,(.+)"--\"\]/
+        inverse_rule: true
+        level: "error"
+        message: "ENTRYPOINT is not Tini"
+        description: "Tini should be used as the init process"
+        reference_url:
+          - "https://github.com/krallin/tini"
+
+  # Ensure that the Shell is passed to the Tini entrypoint
+  # CMD ["/bin/sh"] 
+  CMD:
+    parmaSyntaxRegex: /.+/
+    rules:
+      -
+        label: "shell_cmd"
+        regex: /\[\"\/bin\/sh\"\]/
+        inverse_rule: true
+        level: "error"
+        message: "CMD is not the shell"
+        description: "CMD to pass to Tini should be the shell"
+        reference_url:
+          - "https://github.com/krallin/tini"
+
+required_instructions: 
+  - 
+    instruction: "ENTRYPOINT"
+    count: 1
+    level: "info"
+    message: "There is no 'ENTRYPOINT' instruction"
+    description: "None"
+    reference_url: 
+      - "https://docs.docker.com/engine/reference/builder/"
+      - "#entrypoint"
+  - 
+    instruction: "CMD"
+    count: 1
+    level: "info"
+    message: "There is no 'CMD' instruction"
+    description: "None"
+    reference_url: 
+      - "https://docs.docker.com/engine/reference/builder/"
+      - "#cmd"

@@ -1,0 +1,102 @@
+---
+profile:
+  name: "Label Schema"
+  description: "Catosplace Label Schema File"
+
+line_rules:
+
+  LABEL:
+    paramSyntaxRegex: /.+/
+
+    # Use defined_label_rules to define a set of labels for your dockerfile
+
+    # Label Schema - http://label-schema.org
+    # Label Schema is a community project to provide a shared namespace for use by
+    # multiple tool
+
+    # A label value is 'valid' if it matches the regular expression 'valueRegex',
+    # otherwise a warning is logged with the string "message" at level 'level'.
+    # 'reference_url' provides a web link where the user can get more information
+    # about the rule.
+       
+    defined_namevals:
+
+      'org.label-schema.schema-version':
+        valueRegex: /[\w.${}()"'\\\/~<>\-?\%:]+/
+        message: "Label 'org.label-schema.schema-version' is missing or has invalid format"
+        level: "warn"
+        required: false 
+        reference_url:
+          - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.build-date':
+         valueRegex: /\$BUILD_DATE$/
+         message: "Label 'org.label-schema.build-date' is missing or has invalide format"
+         level: "warn"
+         required: false 
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.name':
+         valueRegex: /[\w]+/
+         message: "Label 'org.label-schema.name' is missing or has invalid format"
+         level: "warn"
+         required: false
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.description':
+         valueRegex: /[\w]+/
+         message: "Label 'org.label-schema.description' is missing or has invalid format"
+         level: "warn"
+         required: false 
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+ 
+      'org.label-schema.usage':
+         valueRegex: /([\w]+).+/
+         message: "Label 'org.label-schema.usage' is missing or has invalid format"
+         level: "warn"
+         required: false 
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.url':
+         valueRegex: /([\w]+).+/
+         message: "Label 'org.label-schema.url' is missing or has invalid format"
+         level: "warn"
+         required: false 
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.vcs-url':
+         valueRegex: /([\w]+).+/
+         message: "Label 'org.label-schema.vcs-url' is missing or has invalid format"
+         level: "warn"
+         required: false
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.vcs-ref':
+         valueRegex: /\$VCS_REF$/
+         message: "Label 'org.label-schema.vcs-ref' is missing or has invalid format"
+         level: "warn"
+         required: false
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"
+
+#      'org.label-schema.vendor':
+#         valueRegex: /[\w]+/
+#         message: "Label 'org.label-schema.vendor' is missing or has invalid format"
+#         level: "warn"
+#         required: false
+#         reference_url:
+#           - "http://label-schema.org/rc1/#build-time-labels"
+
+      'org.label-schema.version':
+         valueRegex: /\$BUILD_VERSION$/
+         message: "Label 'org.label-schema.version' is missing or has invalid format"
+         level: "warn"
+         required: false
+         reference_url:
+           - "http://label-schema.org/rc1/#build-time-labels"

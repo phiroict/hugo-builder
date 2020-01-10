@@ -1,0 +1,11 @@
+---
+profile:
+  name: "Catosplace Default"
+  description: "Catsoplace Default Dockerfile Lint Rules"
+  includes:
+    - OCI_image_spec_annotation_rules.yml
+    - docker_label_schema_label_rules.yml
+    - security_rules.yml
+    - catosplace_rules.yml
+    - alpine_rules.yml
+    - rules.yml

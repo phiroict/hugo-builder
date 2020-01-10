@@ -1,0 +1,29 @@
+---
+profile:
+  name: "Alpine Basebox Rules"
+  description: "Alpine Basebox Dockerfile Lint Rules"
+
+line_rules:
+
+  FROM:
+    parmaSyntaxRegex: /^[\w./\-:]+(:[\w.]+)?(-[\w]+)?( as \w+)?$/i
+    rules:
+      -
+        label: "not_from_alpine"
+        regex: /alpine/
+        inverse_rule: true
+        level: "error"
+        message: "Base Image is not from Alpine"
+        description: "Base Image must be from Alpine"
+        reference_url:
+
+  RUN:
+    paramSyntaxRegex: /.+/
+    rules:
+      - 
+        label: "apk_no_cache"
+        regex: /apk(?!.+--no-cache add)/
+        level: "warn" 
+        message: "Not using `apk --no-cache add`"
+        description: "Using `apk --no-cache add` the index will not be cached locally, saving image space"
+        reference_url: 
