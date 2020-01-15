@@ -1,6 +1,7 @@
 ARG HUGO_VERSION=0.62.2
+ARG ALPINE_VERSION
 
-FROM alpine:3.11.2 AS builder
+FROM alpine:${ALPINE_VERSION} AS builder
 
 ARG HUGO_VERSION
 ARG GIT_VERSION=~2.24.1
@@ -19,7 +20,7 @@ RUN wget https://github.com/gohugoio/hugo/releases/download/v"${HUGO_VERSION}"/h
   && sha256sum -cs hugo_${HUGO_VERSION}_checksums.txt \
   && tar -xzvf hugo_"${HUGO_VERSION}"_Linux-64bit.tar.gz
 
-FROM alpine:3.11.2
+FROM alpine:${ALPINE_VERSION}
 
 ARG HUGO_VERSION
 ARG TINI_VERSION=~0.18.0

@@ -29,9 +29,16 @@ docker run -it --rm --privileged \
 
 ## Building the Docker Image
 
+Prior to building at this time need to set Environment variables:
+
+```
+export ALPINE_VERSION=3.11.2
+```
+
 ```
 docker build \
-  --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+  --build-arg ALPINE_VERSION \
+  --build-arg CREATE_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
   -t catosplace/hugo-builder-new .
 ```
 
