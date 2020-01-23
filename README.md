@@ -8,8 +8,10 @@ docker run --rm -it -v $PWD:/src catosplace/hugo-builder hugo
 
 ### Server
 
+Though some people say that with a bind you do not have to forward ports, for those who use real operating systems like debian, you *do* have to.
+
 ```
-docker run --rm -it -v $PWD:/src catosplace/hugo-builder hugo server --bind 0.0.0.0
+docker run --rm -it p 1313:1313 -v $PWD:/src catosplace/hugo-builder hugo server --bind 0.0.0.0
 ```
 
 #### Aliases   
