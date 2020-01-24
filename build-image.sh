@@ -1,0 +1,1 @@
+docker build --build-arg ALPINE_VERSION=3.11.2  -t phiroict/hugo-builder:scratch_20200124.0 .
